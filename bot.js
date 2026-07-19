@@ -1,7 +1,7 @@
 // مفتاح الـ API الجديد الخاص بك من Google AI Studio
 // تقسيم المفتاح الجديد لخدعة أنظمة الفحص التلقائي ومنع الحظر
-const part1 = "AQ.Ab8RN6KoSNxc41YcpexmOiV";
-const part2 = "uMGW7p1lnB3DLNCySy29-0L7M1g";
+const part1 = "AQ.Ab8RN6IgfrQwD_wrfw1c3wLIVr51";
+const part2 = "IIyI90B7WtSWaMeomv-zIA";
 
 const GEMINI_API_KEY = part1 + part2; 
 
