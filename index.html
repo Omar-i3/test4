@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بوابة زاد المؤمن</title>
+<!-- أيقونة الموقع الذكية (Favicon) -->
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌙</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#070b18;
+    --bg-panel:#0f1730;
+    --bg-panel-2:#141d3d;
+    --gold:#d6a85c;
+    --gold-soft:#f0d9a8;
+    --teal:#5fd6c4;
+    --text-main:#f3efe3;
+    --text-muted:#93a0c2;
+    --border-glass: rgba(214,168,92,0.28);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse at 20% -10%, rgba(95,214,196,0.10), transparent 45%),
+      radial-gradient(ellipse at 80% 0%, rgba(214,168,92,0.12), transparent 40%),
+      var(--bg-deep);
+    color:var(--text-main);
+    font-family:'Tajawal',sans-serif;
+    overflow-x:hidden;
+    min-height:100vh;
+  }
+  #stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
+  h1,h2,h3,.amiri{font-family:'Amiri',serif;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;z-index:1;
+    padding:80px 20px 40px;
+    text-align:center;
+  }
+  .moon{
+    width:120px;height:120px;margin:0 auto 24px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--gold-soft), var(--gold) 55%, #8a6a34 100%);
+    box-shadow:0 0 60px 10px rgba(214,168,92,0.45), 0 0 120px 40px rgba(214,168,92,0.15);
+    animation:breathe 5s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%,100%{transform:scale(1);box-shadow:0 0 60px 10px rgba(214,168,92,0.45),0 0 120px 40px rgba(214,168,92,0.15);}
+    50%{transform:scale(1.06);box-shadow:0 0 80px 18px rgba(214,168,92,0.6),0 0 150px 55px rgba(214,168,92,0.22);}
+  }
+  .hero h1{
+    font-size:clamp(2.8rem,8vw,4.5rem);
+    margin:0 0 10px;
+    color:var(--gold-soft);
+    letter-spacing:2px;
+  }
+  .hero .tagline{
+    font-size:1.15rem;color:var(--text-muted);max-width:600px;margin:0 auto 28px;line-height:2;
+  }
+
+  /* ---------- SEARCH BAR ---------- */
+  .search-wrap{
+    max-width:480px;margin:0 auto 26px;position:relative;z-index:1;padding:0 18px;
+  }
+  .search-box{
+    display:flex;align-items:center;gap:10px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid var(--border-glass);
+    border-radius:16px;padding:10px 16px;
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  }
+  .search-box input{
+    flex:1;background:none;border:none;outline:none;
+    color:var(--text-main);font-family:'Tajawal',sans-serif;font-size:0.95rem;
+  }
+  .search-box input::placeholder{color:var(--text-muted);}
+  .search-count{
+    text-align:center;font-size:0.8rem;color:var(--text-muted);margin-top:8px;
+  }
+  .portal-card.hidden-search{display:none !important;}
+
+  /* ---------- MAIN NAVIGATION GRID ---------- */
+  .main-grid{
+    position:relative;z-index:1;
+    max-width:1000px;margin:10px auto 40px;padding:0 20px 20px;
+    display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:24px;
+  }
+  .portal-card{
+    background:linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015));
+    border:1px solid var(--border-glass);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-radius:24px;padding:32px 24px;
+    text-align:center;text-decoration:none;
+    color:var(--text-main);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    transition:transform .28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow .28s ease, border-color .28s ease;
+    min-height:280px;position:relative;overflow:hidden;
+  }
+  .portal-card::before{
+    content:"";position:absolute;inset:0;opacity:0;
+    background:radial-gradient(circle at 50% 0%, rgba(214,168,92,0.25), transparent 70%);
+    transition:opacity .3s ease;
+  }
+  .portal-card:hover{
+    transform:translateY(-8px);
+    border-color:var(--gold);
+    box-shadow:0 15px 35px rgba(0,0,0,0.4), 0 0 30px rgba(214,168,92,0.2);
+  }
+  .portal-card:hover::before{opacity:1;}
+  
+  .portal-icon{
+    font-size:3.5rem;margin-bottom:16px;position:relative;z-index:1;
+  }
+  .portal-title{
+    font-family:'Amiri',serif;font-size:1.8rem;font-weight:700;
+    color:var(--gold-soft);margin-bottom:10px;position:relative;z-index:1;
+  }
+  .portal-desc{
+    font-size:0.92rem;color:var(--text-muted);line-height:1.8;
+    max-width:240px;position:relative;z-index:1;
+  }
+  .portal-btn{
+    margin-top:20px;padding:10px 24px;border-radius:12px;
+    background:rgba(214,168,92,0.12);border:1px solid var(--border-glass);
+    color:var(--gold-soft);font-size:0.85rem;font-weight:700;
+    transition:all 0.2s ease;position:relative;z-index:1;
+  }
+  .portal-card:hover .portal-btn{
+    background:var(--gold);color:#1a1200;box-shadow:0 0 15px rgba(214,168,92,0.4);
+  }
+
+  /* ---------- SECTION LABELS ---------- */
+  .section-label{
+    text-align:center;position:relative;z-index:1;margin:60px 0 30px;
+  }
+  .section-label span{
+    font-family:'Amiri',serif;font-size:1.7rem;color:var(--gold-soft);
+    padding-bottom:8px;border-bottom:2px solid var(--border-glass);
+  }
+  .section-sub{text-align:center;color:var(--text-muted);font-size:0.95rem;margin-top:-18px;margin-bottom:34px;}
+
+  /* ---------- HADITH SEARCH (dorar.net) ---------- */
+  .hadith-search-wrap{
+    max-width:700px;margin:0 auto;padding:0 18px 60px;position:relative;z-index:1;
+  }
+  .hadith-search-box{
+    display:flex;gap:8px;background:rgba(255,255,255,0.04);
+    border:1px solid var(--border-glass);border-radius:16px;padding:10px;
+    margin-bottom:16px;
+  }
+  .hadith-search-box input{
+    flex:1;background:none;border:none;outline:none;color:var(--text-main);
+    font-family:'Tajawal',sans-serif;font-size:0.95rem;padding:6px 10px;
+  }
+  .hadith-search-box button{
+    background:linear-gradient(135deg,var(--gold),#b9803a);
+    border:none;color:#1a1200;font-weight:700;border-radius:12px;
+    padding:8px 18px;cursor:pointer;font-family:'Tajawal',sans-serif;
+  }
+  .hadith-hint{text-align:center;color:var(--text-muted);font-size:0.8rem;margin:-8px 0 18px;}
+  .hadith-results{display:flex;flex-direction:column;gap:12px;}
+  .hadith-result-item{
+    background:rgba(255,255,255,0.03);border:1px solid var(--border-glass);
+    border-radius:12px;padding:14px 16px;font-size:0.92rem;line-height:1.9;
+  }
+  .hadith-loading, .hadith-empty{text-align:center;color:var(--text-muted);font-size:0.9rem;padding:16px;}
+  .hadith-source-link{
+    display:block;text-align:center;margin-top:10px;color:var(--teal);
+    font-size:0.85rem;text-decoration:none;
+  }
+
+  /* ---------- THEME TOGGLE ---------- */
+  .theme-btn{
+    position:fixed;top:16px;left:16px;z-index:60;
+    width:44px;height:44px;border-radius:50%;
+    background:rgba(255,255,255,0.06);
+    border:1px solid var(--border-glass);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.25rem;cursor:pointer;color:var(--text-main);
+    transition:transform .25s ease, background .25s ease;
+  }
+  .theme-btn:hover{transform:scale(1.08);}
+
+  /* ---------- LIGHT MODE ---------- */
+  body.light{
+    --bg-deep:#f6efe0;
+    --bg-panel:#fffaf1;
+    --bg-panel-2:#fdf3de;
+    --gold:#b9803a;
+    --gold-soft:#8a5a24;
+    --teal:#1f8f7c;
+    --text-main:#3a2f22;
+    --text-muted:#7a6d58;
+    --border-glass: rgba(185,128,58,0.32);
+  }
+  body.light{
+    background:
+      radial-gradient(ellipse at 20% -10%, rgba(31,143,124,0.08), transparent 45%),
+      radial-gradient(ellipse at 80% 0%, rgba(185,128,58,0.14), transparent 40%),
+      var(--bg-deep);
+  }
+  body.light #stars{opacity:0.25;}
+  body.light .moon{
+    background:radial-gradient(circle at 35% 30%, #fff6df, #ffd873 55%, #e0a53a 100%);
+    box-shadow:0 0 60px 14px rgba(255,200,90,0.55), 0 0 130px 45px rgba(255,200,90,0.22);
+  }
+  body.light .portal-card{
+    background:linear-gradient(160deg, rgba(255,255,255,0.65), rgba(255,255,255,0.25));
+  }
+
+  .toast{
+    position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--bg-panel-2);border:1px solid var(--border-glass);
+    color:var(--gold-soft);padding:12px 22px;border-radius:14px;
+    font-size:0.9rem;z-index:100;opacity:0;pointer-events:none;
+    transition:opacity .3s ease, transform .3s ease;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  footer{
+    text-align:center;padding:50px 20px 40px;position:relative;z-index:1;
+    color:var(--text-muted);font-size:0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<button class="theme-btn" id="themeBtn" aria-label="تبديل الوضع">🌞</button>
+
+<div class="hero">
+  <div class="moon"></div>
+  <h1>زاد المؤمن</h1>
+  <p class="tagline">بوابتك الروحية الشاملة إلى رياض العبادة والذكر والتعلق بالله سبحانه وتعالى في السراء والضراء.</p>
+</div>
+
+<!-- شريط البحث الفخمة لتصفية الأقسام والبحث التلقائي -->
+<div class="search-wrap">
+  <div class="search-box">
+    <span>🔎</span>
+    <form id="sectionSearchForm" style="flex:1;display:contents;">
+      <input type="text" id="sectionSearch" enterkeyhint="search" autocomplete="off" placeholder="ابحث في أقسام البوابة (خريطة الدعاء، الأذكار)...">
+    </form>
+  </div>
+  <div class="search-count" id="searchCount"></div>
+</div>
+
+<div class="main-grid" id="mainGrid">
+  
+  <!-- الكرت الرئيسي: خريطة الدعاء التفاعلية (يؤدي لملف duaa.html) -->
+  <a href="duaa.html" class="portal-card">
+    <div class="portal-icon">🤲</div>
+    <div class="portal-title">خريطة الدعاء</div>
+    <div class="portal-desc">استكشف رحلة الدعاء التفاعلية، علاقته بالقدر، اليقين، وآداب وأوقات الاستجابة وموانعها.</div>
+    <div class="portal-btn">دخول القسم ←</div>
+  </a>
+
+<!-- كرت الأذكار المفعّل -->
+  <a href="azkar.html" class="portal-card">
+    <div class="portal-icon">📿</div>
+    <div class="portal-title">ركن الأذكار اليومية</div>
+    <div class="portal-desc">أذكار الصباح والمساء، أذكار الصلاة، والأدعية المأثورة عن النبي ﷺ لتكون في حفظ الله دائماً.</div>
+    <div class="portal-btn">دخول القسم ←</div>
+  </a>
+
+  <!-- كرت فكرة إضافية: قسم جديد -->
+  <a href="#" class="portal-card" onclick="alert('قريباً بإذن الله... جاري العمل على هذا القسم ✨'); return false;">
+    <div class="portal-icon">🌤️</div>
+    <div class="portal-title">قسم جديد</div>
+    <div class="portal-desc">قريباً</div>
+    <div class="portal-btn">قريباً...</div>
+  </a>
+
+</div>
+
+<div class="section-label"><span>دقّق حديثاً</span></div>
+<p class="section-sub">بحث مباشر في الموسوعة الحديثية بموقع الدرر السنية</p>
+<div class="hadith-search-wrap">
+  <form id="hadithSearchForm" class="hadith-search-box" style="display:flex;gap:8px;">
+    <input type="text" id="hadithQuery" enterkeyhint="search" autocomplete="off" placeholder="اكتب جزءاً من نص الحديث...">
+    <button type="submit" id="hadithSearchBtn">بحث</button>
+  </form>
+  <div class="hadith-hint">نحاول جلب النتائج مباشرة من dorar.net؛ إذا تعذّر ذلك، ننقلك للبحث هناك مباشرة</div>
+  <div class="hadith-results" id="hadithResults"></div>
+</div>
+
+<footer>
+  <p>جميع الحقوق محفوظة © عمر</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------------- starfield ---------------- */
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let stars = [];
+function resizeCanvas(){
+  canvas.height = document.body.scrollHeight;
+  canvas.width = window.innerWidth;
+}
+function initStars(){
+  resizeCanvas();
+  stars = [];
+  const count = Math.floor((canvas.width*canvas.height)/9000);
+  for(let i=0;i<count;i++){
+    stars.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height,
+      r:Math.random()*1.3+0.3,
+      a:Math.random(),
+      speed:Math.random()*0.02+0.005
+    });
+  }
+}
+function drawStars(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = '#f0d9a8';
+  for(const s of stars){
+    s.a += s.speed;
+    const op = (Math.sin(s.a)+1)/2*0.7+0.15;
+    ctx.globalAlpha = op;
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(drawStars);
+}
+window.addEventListener('resize', initStars);
+initStars();
+drawStars();
+setTimeout(initStars, 800);
+
+/* ---------------- theme toggle ---------------- */
+const themeBtn = document.getElementById('themeBtn');
+themeBtn.addEventListener('click', ()=>{
+  const isLight = document.body.classList.toggle('light');
+  themeBtn.textContent = isLight ? '🌙' : '🌞';
+});
+
+/* ---------------- toast ---------------- */
+const toastEl = document.getElementById('toast');
+let toastTimer;
+function showToast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=> toastEl.classList.remove('show'), 2400);
+}
+
+/* ---------------- section search ---------------- */
+const sectionSearch = document.getElementById('sectionSearch');
+const searchCount = document.getElementById('searchCount');
+const portalCards = document.querySelectorAll('.portal-card');
+
+// دالة ذكية لتنظيف وتوحيد الحروف العربية من أجل بحث مرن
+function normalizeArabic(text) {
+  return text
+    .replace(/[أإآ]/g, 'ا') // تحويل الألفات بمختلف أشكالها إلى ألف عادية
+    .replace(/ة/g, 'ه')    // تحويل التاء المربوطة إلى هاء
+    .replace(/ى/g, 'ي')    // تحويل الألف المقصورة إلى ياء
+    .trim()
+    .toLowerCase();
+}
+
+sectionSearch.addEventListener('input', () => {
+  const term = normalizeArabic(sectionSearch.value);
+  let matchCount = 0;
+
+  portalCards.forEach(card => {
+    const title = normalizeArabic(card.querySelector('.portal-title').textContent);
+    const desc = normalizeArabic(card.querySelector('.portal-desc').textContent);
+    const match = !term || title.includes(term) || desc.includes(term);
+    card.classList.toggle('hidden-search', !match);
+    if(match) matchCount++;
+  });
+
+  searchCount.textContent = sectionSearch.value.trim() ? `${matchCount} نتيجة` : '';
+});
+
+/* Form Search Action with Automatic Dorar Fallback Execution */
+document.getElementById('sectionSearchForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const rawTerm = sectionSearch.value.trim();
+  if(!rawTerm) return;
+
+  const term = normalizeArabic(rawTerm);
+
+  // التحقق من وجود كروت متطابقة بعد تنظيف الحروف
+  let hasLocalMatch = false;
+  portalCards.forEach(card => {
+    const title = normalizeArabic(card.querySelector('.portal-title').textContent);
+    const desc = normalizeArabic(card.querySelector('.portal-desc').textContent);
+    if (title.includes(term) || desc.includes(term)) {
+      hasLocalMatch = true;
+    }
+  });
+
+  if (hasLocalMatch) {
+    const firstMatch = document.querySelector('.portal-card:not(.hidden-search)');
+    if (firstMatch) {
+      firstMatch.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+  } else {
+    // إذا لم يتطابق النص مع الكروت حتى بعد توحيد الحروف، نذهب للدرر السنية
+    document.getElementById('hadithQuery').value = rawTerm;
+    document.getElementById('hadithResults').scrollIntoView({behavior:'smooth', block:'center'});
+    runDorarSearch();
+    showToast('لم نعثر على قسم مطابق، تم تفعيل بحث "الدرر السنية" تلقائياً! ✨');
+  }
+});
+
+/* ---------------- live hadith search (dorar.net JSONP) ---------------- */
+const hadithQuery = document.getElementById('hadithQuery');
+const hadithResults = document.getElementById('hadithResults');
+
+function renderDorarFallback(message, q){
+  hadithResults.innerHTML = `
+    <div class="hadith-empty">${message}</div>
+    <button type="button" class="hadith-source-link" id="dorarFallbackBtn" style="background:none;border:none;cursor:pointer;width:100%;font-family:'Tajawal',sans-serif;font-weight:bold;color:var(--gold);">
+      اضغط هنا للانتقال للبحث المباشر في موقع الدرر السنية ↗
+    </button>`;
+  
+  window.open(`https://dorar.net/hadith/search?q=${encodeURIComponent(q)}`, '_blank', 'noopener');
+
+  document.getElementById('dorarFallbackBtn').addEventListener('click', ()=>{
+    window.open(`https://dorar.net/hadith/search?q=${encodeURIComponent(q)}`, '_blank', 'noopener');
+  });
+}
+
+function runDorarSearch(){
+  const q = hadithQuery.value.trim();
+  if(!q) return;
+  hadithResults.innerHTML = '<div class="hadith-loading">جارٍ البحث في الدرر السنية...</div>';
+
+  const cbName = 'dorarCb_' + Date.now();
+  const cleanup = ()=>{
+    delete window[cbName];
+    const s = document.getElementById(cbName);
+    if(s) s.remove();
+  };
+
+  const timeoutId = setTimeout(()=>{
+    renderDorarFallback('تعذّر الوصول للنتائج المباشرة من هذا الموقع.', q);
+    cleanup();
+  }, 5000);
+
+  window[cbName] = function(data){
+    clearTimeout(timeoutId);
+    const list = (data && data.ahadith) ? data.ahadith : [];
+    if(!list.length){
+      renderDorarFallback('لا توجد نتائج مطابقة.', q);
+    }else{
+      hadithResults.innerHTML = list.slice(0,10).map(item=>`
+        <div class="hadith-result-item">${item.th || ''}</div>
+      `).join('') + `
+        <a class="hadith-source-link" href="https://dorar.net/hadith" target="_blank" rel="noopener">
+          تصفّح الموسوعة الحديثية كاملة ↗
+        </a>`;
+    }
+    cleanup();
+  };
+
+  const script = document.createElement('script');
+  script.id = cbName;
+  script.src = `https://dorar.net/dorar_api.json?skey=${encodeURIComponent(q)}&callback=${cbName}`;
+  script.onerror = ()=>{
+    clearTimeout(timeoutId);
+    renderDorarFallback('تعذّر تحميل النتائج مباشرة.', q);
+    cleanup();
+  };
+  document.head.appendChild(script);
+}
+
+document.getElementById('hadithSearchForm').addEventListener('submit', (e)=>{
+  e.preventDefault();
+  runDorarSearch();
+});
+</script>
+
+
+<!-- ==================== صندوق الشات الذكي التفاعلي (مساعد تبصرة الرقمي) ==================== -->
+<div id="ai-chat-widget" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; font-family: 'Tajawal', sans-serif;">
+  <!-- زر فتح الشات الطائر -->
+  <button id="chat-trigger-btn" style="width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #d6a85c, #b9803a); border: 1px solid rgba(214,168,92,0.3); color: #1a1200; font-size: 1.6rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 15px rgba(214,168,92,0.2); transition: transform 0.25s ease;">💬</button>
+
+  <!-- نافذة الشات الزجاجية -->
+  <div id="chat-window" style="display: none; width: 350px; max-width: 90vw; height: 480px; max-height: 80vh; background: linear-gradient(180deg, #141d3d, #0f1730); border: 1px solid rgba(214,168,92,0.28); border-radius: 20px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); flex-direction: column; overflow: hidden; position: absolute; bottom: 70px; left: 0; animation: chatSlideUp 0.3s ease; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);">
+    <!-- الهيدر -->
+    <div style="background: rgba(255,255,255,0.03); padding: 14px 16px; border-bottom: 1px solid rgba(214,168,92,0.15); display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 1.3rem;">🌙</span>
+        <div>
+          <div style="font-weight: 700; color: #f0d9a8; font-size: 0.95rem;">مساعد تبصرة الرقمي</div>
+          <div style="font-size: 0.72rem; color: #5fd6c4;">فتاوى موثقة وأدلية من السنة الصحيحة</div>
+        </div>
+      </div>
+      <button id="chat-close-btn" style="background: none; border: none; color: #93a0c2; font-size: 1.1rem; cursor: pointer;">✕</button>
+    </div>
+
+    <!-- منطقة الرسائل -->
+    <div id="chat-messages" style="flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; font-size: 0.9rem; line-height: 1.6;">
+      <div style="background: rgba(255,255,255,0.05); color: #f3efe3; padding: 10px 14px; border-radius: 14px 14px 0 14px; align-self: flex-start; max-width: 85%;">
+        السلام عليكم ورحمة الله وبركاته. أنا **مساعد تبصرة الرقمي**، مرشدك الفقهي والحديثي. يمكنك سؤالي عن الفتاوى والأحكام، وسأجيبك بأدلية موثقة من القرآن والسنة الصحيحة بإذن الله.
+      </div>
+    </div>
+
+    <!-- صندوق الإدخال -->
+    <form id="chat-form" style="display: flex; padding: 10px; background: rgba(0,0,0,0.2); border-top: 1px solid rgba(214,168,92,0.1); gap: 8px;">
+      <input type="text" id="chat-input" placeholder="اكتب سؤالك الشرعي هنا..." autocomplete="off" required style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(214,168,92,0.15); border-radius: 12px; padding: 10px 14px; color: #f3efe3; font-family: 'Tajawal', sans-serif; font-size: 0.9rem; outline: none;">
+      <button type="submit" style="background: linear-gradient(135deg, #d6a85c, #b9803a); border: none; color: #1a1200; font-weight: 700; padding: 0 16px; border-radius: 12px; cursor: pointer; font-family: 'Tajawal', sans-serif; font-size: 0.9rem;">إرسال</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  @keyframes chatSlideUp { from { opacity: 0; transform: translateY(15px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  #chat-messages::-webkit-scrollbar { width: 5px; }
+  #chat-messages::-webkit-scrollbar-thumb { background: rgba(214, 168, 92, 0.2); border-radius: 10px; }
+</style>
+
+<script>
+    // أكواد تفعيل فتح وإغلاق واجهة الشات بصفحتك الرئيسية
+    const chatTriggerBtn = document.getElementById('chat-trigger-btn');
+    const chatWindow = document.getElementById('chat-window');
+    const chatCloseBtn = document.getElementById('chat-close-btn');
+    const chatInput = document.getElementById('chat-input');
+
+    chatTriggerBtn.addEventListener('click', () => {
+        const isHidden = chatWindow.style.display === 'none' || chatWindow.style.display === '';
+        chatWindow.style.display = isHidden ? 'flex' : 'none';
+        if(isHidden) chatInput.focus();
+    });
+
+    chatCloseBtn.addEventListener('click', () => {
+        chatWindow.style.display = 'none';
+    });
+
+    // دالة إضافة وعرض الرسائل في واجهة الشات
+    function appendMessage(text, sender) {
+        const chatMessages = document.getElementById('chat-messages');
+        const msgDiv = document.createElement('div');
+        
+        if (sender === 'user') {
+            msgDiv.style.cssText = "background: #d6a85c; color: #1a1200; padding: 10px 14px; border-radius: 14px 14px 0 14px; align-self: flex-end; max-width: 85%; font-weight: bold;";
+        } else {
+            msgDiv.style.cssText = "background: rgba(255,255,255,0.06); color: #f3efe3; padding: 10px 14px; border-radius: 14px 14px 14px 0; align-self: flex-start; max-width: 85%;";
+        }
+        
+        msgDiv.innerHTML = text.replace(/\n/g, '<br>');
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        return msgDiv;
+    }
+  </script>
+
+  <!-- السطر السحري الجديد لاستدعاء البوت الذكي والمستقل -->
+  <script src="bot.js"></script>
+</body>
+</html>
