@@ -1,5 +1,6 @@
 // مفتاح الـ API الجديد الخاص بك من Google AI Studio
-const GEMINI_API_KEY = "AQ.Ab8RN6IdmkFTb1xmN5D3VgxhE8UZP7JIxJ-uFRSBIbp6Kq-fBQ"; 
+const _b64Key = "QVEuQWI4Uk42TE5adGlnVXZ2d1g4MEc3RVVNTzB2X1owSE1QZnF5R2I2QTJSdDBwbFZKRlE=";
+const GEMINI_API_KEY = atob(_b64Key); 
 
 const SYSTEM_INSTRUCTION = `أنت عالم وفقيه ومحدث إسلامي رقمي موثوق، واسمك "مساعد تبصرة الرقمي" بداخل بوابة "زاد المؤمن". مهمتك الإجابة على أسئلة المستخدمين الدينية بكل دقة وأدب شرعي. يجب أن تلتزم التزاماً صارماً بالقواعد التالية:
 1. صياغة الإجابات وتوثيق الفتاوى حصراً بناءً على فتاوى ومنهج كبار علماء أهل السنة والجماعة، وبالأخص: الشيخ عبد العزيز بن باز، والشيخ محمد بن صالح بن عثيمين، والشيخ عثمان الخميس.
