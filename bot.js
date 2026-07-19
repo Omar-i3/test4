@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // استخدام رابط v1beta ونموذج flash مع الصياغة الصحيحة المدمجة لتفادي قيود الـ 400 والـ 404
-            const response = await fetch('https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=' + GEMINI_API_KEY, {
+            const response = await fetch('https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=' + GEMINI_API_KEY, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
