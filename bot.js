@@ -2,8 +2,25 @@
 // تقسيم المفتاح الجديد لخدعة أنظمة الفحص التلقائي ومنع الحظر
 const part1 = "AQ.Ab8RN6IgfrQwD_wrfw1c3wLIVr51";
 const part2 = "IIyI90B7WtSWaMeomv-zIA";
-
 const GEMINI_API_KEY = part1 + part2; 
+
+async function fetchWithRetry(url, options, retries = 3, delay = 2000) {
+    try {
+        const response = await fetch(url, options);
+        if (response.status === 429 && retries > 0) {
+            console.warn(`تم تجاوز الحد المسموح. إعادة المحاولة بعد ${delay / 1000} ثوانٍ...`);
+            await new Promise(resolve => setTimeout(resolve, delay));
+            return fetchWithRetry(url, options, retries - 1, delay * 2);
+        }
+        return response;
+    } catch (error) {
+        if (retries > 0) {
+            await new Promise(resolve => setTimeout(resolve, delay));
+            return fetchWithRetry(url, options, retries - 1, delay * 2);
+        }
+        throw error;
+    }
+}
 
 const SYSTEM_INSTRUCTION = `أنت عالم وفقيه ومحدث إسلامي رقمي موثوق، واسمك "مساعد تبصرة الرقمي" بداخل بوابة "زاد المؤمن". مهمتك الإجابة على أسئلة المستخدمين الدينية بكل دقة وأدب شرعي. يجب أن تلتزم التزاماً صارماً بالقواعد التالية:
 1. صياغة الإجابات وتوثيق الفتاوى حصراً بناءً على فتاوى ومنهج كبار علماء أهل السنة والجماعة، وبالأخص: الشيخ عبد العزيز بن باز، والشيخ محمد بن صالح بن عثيمين، والشيخ عثمان الخميس.
@@ -34,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // استخدام رابط v1beta ونموذج flash مع الصياغة الصحيحة المدمجة لتفادي قيود الـ 400 والـ 404
-                const response = await fetch('https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=' + GEMINI_API_KEY, {
+                const response = await fetchWithRetry('https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=' + GEMINI_API_KEY, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
